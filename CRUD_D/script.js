@@ -6,7 +6,7 @@ document.getElementById('contactForm').addEventListener('submit', function(event
     const message = document.getElementById('message').value;
 
     console.log("It's about to call the endpoint")
-    fetch("http://localhost:3000/submit-form", {
+    fetch("/submit-form", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

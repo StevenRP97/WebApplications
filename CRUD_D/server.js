@@ -22,11 +22,18 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
+// Tests of endpoints
+app.get('/about', (req, res) =>{
+    res.send("<h1> El endpoint sirve</h1>")
+});
+
 // Handle form submission
 console.log("It's being used")
-app.post("http://localhost:3000/submit-form", (req, res) => {
+app.post("/submit-form", (req, res) => {
+    console.log("It's being used x2")
     const { name, email, message } = req.body;
     const query = 'INSERT INTO contacts (name, email, message) VALUES (?, ?, ?)';
+    console.log("It's being used x3")
 
     db.query(query, [name, email, message], (err, result) => {
         if (err) throw err;
