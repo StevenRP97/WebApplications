@@ -17,7 +17,7 @@ document.getElementById('contactForm').addEventListener('submit', function(event
     .then(data => {
         document.getElementById('responseMessage').textContent = data;
         document.getElementById('contactForm').reset();
-    })
+    })  
     .catch(error => console.error('Error:', error));
     console.log("It just called the endpoint");
 });
