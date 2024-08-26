@@ -14,8 +14,6 @@ const connection = mysql.createConnection({
     database: 'contact_form_db'
 })
 
-// Holiii
-
 connection.connect((err) => {
     if (err) {
         console.log('Papu, hay un error en la conexión, el cual es el siguiente: ' + err.stack)
