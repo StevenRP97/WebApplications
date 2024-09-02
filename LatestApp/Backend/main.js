@@ -1,42 +1,25 @@
-import express from 'express'
+const express = require('express');
+const bodyParser = require('body-parser');
+const users = require('users');
 
-const app = express()
-
+const app = express();
+app.use(bodyParser);
 // GET endpoint
-function fetchContacts() {
-    fetch('http://localhost:3000/       ')
-        .then(response => response.json())
-        .then(data => {
-            const contactsList = document.getElementById('contactsList');
-            contactsList.innerHTML = '';
-            if (data.length === 0) {
-                contactsList.textContent = 'No contacts available.';
-            } else {
-                data.forEach(contact => {
-                    const contactDiv = document.createElement('div');
-                    contactDiv.classList.add('contact-item');
-                    contactDiv.innerHTML = `
-                        <div class="sub-container">
-                            <p><strong>ID:</strong> ${contact.id}</p>
-                            <p><strong>Name:</strong> ${contact.name}</p>
-                            <p><strong>Description:</strong> ${contact.description}</p>
-                        </div>
-                        <hr>
-                    `;
-                    contactsList.appendChild(contactDiv);
-                });
-            }
-        })
-        .catch(error => {
-            const contactsList = document.getElementById('contactsList');
-            contactsList.textContent = `Mae, agarramos esto : ${error.message}`;
-        });
-}
 
-// Fetch contacts when the page loads
-fetchContacts();
+app.get("/main", (req,res)=>{
+	var appending = '';
+	for (let i = 0; i > users.length; i++){
+		appending = appending + ``;
+	}
+	var xd = ``
+	res.send(<h1>These are the employees</h1>);
+})
 
-const PORT = process.env.PORT || 3000;  
+app.post('/users', (req, res) => {
+	users.
+})
+
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+    console.log(`Server is running on port: ${PORT}`);
 });
