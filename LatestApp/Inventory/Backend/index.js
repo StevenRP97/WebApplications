@@ -1,6 +1,5 @@
 import express from "express";
 import mysql from "mysql2";
-import bodyParser from "body-parser";
 
 const app = express();
 app.use(express.json());
@@ -31,11 +30,42 @@ app.get('/inventory', (req, res)=>{ // GET endpoint to get all assets from Asset
 })
 
 app.post('/inventory', (req, res)=>{ // POST endpoint to insert new asset into AssetTable
-  console.log('Successfully into the endpoint')
   const {Name, Description, AssetTag, CreationDate, IsActive} = req.body;
-  console.log('These are the input requests: ', Name, Description, AssetTag, CreationDate, IsActive )
   const dbQuery = `INSERT INTO InventoryDB.AssetTable (Name, Description, AssetTag, CreationDate, IsActive) VALUES(?, ?, ?, ?, ?);`
   connecting.query(dbQuery, [Name, Description, AssetTag, CreationDate, IsActive], (err, result)=>{
+    if (err) {
+      return res.status(500).json({error: err.message})
+    }
+    return res.json(result);
+  })
+})
+
+app.put('/inventory', (req, res)=>{ // PUT endpoint to update assets in AssetTable 
+  const {Name, Description, CreationDate, AssetTag} = req.body;
+  const dbQuery = `UPDATE AssetTable SET Name = ?, Description = ?, CreationDate = ? WHERE (AssetTag = ?);`
+  connecting.query(dbQuery, [Name, Description, CreationDate, AssetTag], (err, result)=>{
+    if (err) {
+      return res.status(500).json({error: err.message})
+    }
+    return res.json(result);
+  })
+})
+
+app.patch('/inventory', (req, res)=>{ // PATCH endpoint to update active status of an asset in AssetTable 
+  const {Name, Description, CreationDate, IsActive, AssetTag} = req.body;
+  const dbQuery = `UPDATE AssetTable SET IsActive = ? WHERE (AssetTag = ?);`
+  connecting.query(dbQuery, [IsActive, AssetTag], (err, result)=>{
+    if (err) {
+      return res.status(500).json({error: err.message})
+    }
+    return res.json(result);
+  })
+})
+
+app.delete('/inventory', (req, res)=>{ // DELETE endpoint to remove assets from AssetTable
+  const {AssetTag} = req.body;
+  const dbQuery = `DELETE FROM AssetTable WHERE (AssetTag = ?);`
+  connecting.query(dbQuery, [AssetTag], (err, result)=>{
     if (err) {
       return res.status(500).json({error: err.message})
     }
@@ -47,3 +77,4 @@ const port = process.env.PORT || 3000;
 app.listen(port, () =>{
   console.log(`Successfully listening in port ${port}`)
 })
+
