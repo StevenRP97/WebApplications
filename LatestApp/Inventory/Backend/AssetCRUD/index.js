@@ -1,3 +1,4 @@
+// Declaration of imports and global variables
 import express from "express";
 import mysql from "mysql2";
 
@@ -19,9 +20,20 @@ connecting.connect((err)=>{
 })
 
 // Declaration of all the endpoints 
-app.get('/inventory', (req, res)=>{ // GET endpoint to get all assets from AssetTable
+app.get('/', (req, res)=>{ // GET endpoint to get all assets from AssetTable
   const dbQuery = 'SELECT * FROM AssetTable LIMIT 0, 1000;'
   connecting.query(dbQuery, (err, result)=>{
+    if (err) {
+      return res.status(500).json({error: err.message})
+    }
+    res.json(result);
+  })
+})
+
+app.get('/inventory', (req, res)=>{ // GET endpoint to get all assets from AssetTable
+ const {AssetTag} = req.body;
+ const dbQuery = 'SELECT * FROM AssetTable WHERE AssetTag = ?;'
+  connecting.query(dbQuery, [AssetTag], (err, result)=>{
     if (err) {
       return res.status(500).json({error: err.message})
     }
@@ -73,7 +85,8 @@ app.delete('/inventory', (req, res)=>{ // DELETE endpoint to remove assets from 
   })
 })
 
-const port = process.env.PORT || 3000;
+// Declaration of the listening thing (I don't remember the name of it xd) 
+const port = 3000;
 app.listen(port, () =>{
   console.log(`Successfully listening in port ${port}`)
 })
