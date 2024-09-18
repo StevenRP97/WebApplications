@@ -20,7 +20,7 @@ connecting.connect((err)=>{
 })
 
 // Declaration of all the endpoints 
-app.get('/', (req, res)=>{ // GET endpoint to get all assets from AssetTable
+app.get('/', (req, res)=>{ // GET endpoint to get all users from UserTable
   const dbQuery = 'SELECT * FROM UserTable LIMIT 0, 1000;'
   connecting.query(dbQuery, (err, result)=>{
     if (err) {
@@ -30,7 +30,7 @@ app.get('/', (req, res)=>{ // GET endpoint to get all assets from AssetTable
   })
 })
 
-app.get('/user', (req, res)=>{ // GET endpoint to get all assets from AssetTable
+app.get('/user', (req, res)=>{ // GET endpoint to get specific users from UserTable
  const {ID} = req.body;
  const dbQuery = 'SELECT * FROM UserTable WHERE ID = ?;'
   connecting.query(dbQuery, [ID], (err, result)=>{
@@ -41,7 +41,7 @@ app.get('/user', (req, res)=>{ // GET endpoint to get all assets from AssetTable
   })
 })
 
-app.post('/user', (req, res)=>{ // POST endpoint to insert new asset into AssetTable
+app.post('/user', (req, res)=>{ // POST endpoint to insert new users into UserTable
   const {Name, LastName, Email, ID} = req.body;
   const dbQuery = `INSERT INTO UserTable (Name, LastName, Email, ID) VALUES(?, ?, ?, ?);`
   connecting.query(dbQuery, [Name, LastName, Email, ID], (err, result)=>{
@@ -52,21 +52,10 @@ app.post('/user', (req, res)=>{ // POST endpoint to insert new asset into AssetT
   })
 })
 
-app.put('/user', (req, res)=>{ // PUT endpoint to update assets in AssetTable 
+app.put('/user', (req, res)=>{ // PUT endpoint to update users in UserTable 
   const {Name, LastName, Email, ID} = req.body;
   const dbQuery = `UPDATE UserTable SET Name = ?, LastName = ?, Email = ? WHERE (ID = ?);`
   connecting.query(dbQuery, [Name, LastName, Email, ID], (err, result)=>{
-    if (err) {
-      return res.status(500).json({error: err.message})
-    }
-    return res.json(result);
-  })
-})
-
-app.delete('/user', (req, res)=>{ // DELETE endpoint to remove assets from AssetTable
-  const {ID} = req.body;
-  const dbQuery = `DELETE FROM UserTable WHERE (ID = ?);`
-  connecting.query(dbQuery, [ID], (err, result)=>{
     if (err) {
       return res.status(500).json({error: err.message})
     }

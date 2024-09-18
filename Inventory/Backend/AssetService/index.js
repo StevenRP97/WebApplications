@@ -69,19 +69,6 @@ app.patch('/inventory', (req, res)=>{ // PATCH endpoint to update active status 
   })
 })
 
-app.delete('/inventory', (req, res)=>{ // DELETE endpoint to remove assets from AssetTable
-  const {AssetTag} = req.body;
-  const dbQuery = `DELETE FROM AssetTable WHERE (AssetTag = ?);`
-  connecting.query(dbQuery, [AssetTag], (err, result)=>{
-    if (err) {
-      return res.status(500).json({error: err.message})
-    }res.json(result);
-  })
-})
-
-// Validation 
-
-
 // Declaration of the listening thing (I don't remember the name of it xd) 
 const port = 3000;
 app.listen(port, () =>{
