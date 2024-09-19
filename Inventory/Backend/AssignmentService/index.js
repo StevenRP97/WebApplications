@@ -56,7 +56,7 @@ app.get('/assign', (req, res)=>{ // GET endpoint to get the specified assignment
 })
 
 app.post('/assign', (req, res)=>{ // POST endpoint to insert new assignment into AssignmentTable
-  const {UserID, AssetTag, AssignDate, AssignID} = req.body;
+  const {UserID, AssetTag, AssignDate, IsActive} = req.body;
 
   let dbQuery = 'SELECT * FROM AssignmentTable WHERE AssetTag = ?'
   connecting.query(dbQuery, [AssetTag], (err, result)=>{
@@ -64,8 +64,8 @@ app.post('/assign', (req, res)=>{ // POST endpoint to insert new assignment into
 
     if(result.length > 0){return res.status(400).send('This asset tag already exists')}
 
-    dbQuery = `INSERT INTO AssignmentTable (UserID, AssetTag, AssignDate) VALUES(?, ?, ?);`
-    connecting.query(dbQuery, [UserID, AssetTag, AssignDate], (err, result)=>{
+    dbQuery = `INSERT INTO AssignmentTable (UserID, AssetTag, AssignDate, IsActive) VALUES(?, ?, ?, ?);`
+    connecting.query(dbQuery, [UserID, AssetTag, AssignDate, IsActive], (err, result)=>{
       if (err) {
         return res.status(500).json({error: err.message})
       }res.json(result);
