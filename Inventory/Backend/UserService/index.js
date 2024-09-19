@@ -25,8 +25,7 @@ app.get('/', (req, res)=>{ // GET endpoint to get all users from UserTable
   connecting.query(dbQuery, (err, result)=>{
     if (err) {
       return res.status(500).json({error: err.message})
-    }
-    res.json(result);
+    }res.json(result);
   })
 })
 
@@ -36,19 +35,17 @@ app.get('/user', (req, res)=>{ // GET endpoint to get specific users from UserTa
   connecting.query(dbQuery, [ID], (err, result)=>{
     if (err) {
       return res.status(500).json({error: err.message})
-    }
-    res.json(result);
+    }res.json(result);
   })
 })
 
 app.post('/user', (req, res)=>{ // POST endpoint to insert new users into UserTable
-  const {Name, LastName, Email, ID} = req.body;
-  const dbQuery = `INSERT INTO UserTable (Name, LastName, Email, ID) VALUES(?, ?, ?, ?);`
-  connecting.query(dbQuery, [Name, LastName, Email, ID], (err, result)=>{
+  const {Name, LastName, Email, ID, IsActive} = req.body;
+  const dbQuery = `INSERT INTO UserTable (Name, LastName, Email, ID, IsActive) VALUES(?, ?, ?, ?, ?);`
+  connecting.query(dbQuery, [Name, LastName, Email, ID, IsActive], (err, result)=>{
     if (err) {
       return res.status(500).json({error: err.message})
-    }
-    return res.json(result);
+    }res.json(result);
   })
 })
 
@@ -58,8 +55,7 @@ app.put('/user', (req, res)=>{ // PUT endpoint to update users in UserTable
   connecting.query(dbQuery, [Name, LastName, Email, ID], (err, result)=>{
     if (err) {
       return res.status(500).json({error: err.message})
-    }
-    return res.json(result);
+    }res.json(result);
   })
 })
 
