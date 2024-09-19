@@ -11,7 +11,6 @@ const connecting = mysql.createConnection({
   user:'root',
   password:'0123456789',
   database:'InventoryDB'
-
 })
 
 connecting.connect((err)=>{

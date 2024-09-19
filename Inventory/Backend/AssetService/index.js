@@ -60,7 +60,7 @@ app.put('/inventory', (req, res)=>{ // PUT endpoint to update assets in AssetTab
 })
 
 app.patch('/inventory', (req, res)=>{ // PATCH endpoint to update active status of an asset in AssetTable 
-  const {Name, Description, CreationDate, IsActive, AssetTag} = req.body;
+  const {IsActive, AssetTag} = req.body;
   const dbQuery = `UPDATE AssetTable SET IsActive = ? WHERE (AssetTag = ?);`
   connecting.query(dbQuery, [IsActive, AssetTag], (err, result)=>{
     if (err) {
