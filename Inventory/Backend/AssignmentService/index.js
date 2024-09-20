@@ -75,7 +75,7 @@ app.post('/assign', (req, res)=>{ // POST endpoint to insert new assignment into
 
 app.patch('/assign', (req, res)=>{ // PATCH endpoint to update the status of an assignment in AssignmentTable
   const {AssetTag, UserID, AssignID, SearchBy, IsActive} = req.body;
-  let SearchColumn, inputData, SearchValue= ""
+  let SearchColumn,  SearchValue= ""
 
   switch(SearchBy){
     case 0:
