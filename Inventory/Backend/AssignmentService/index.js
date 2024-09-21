@@ -58,7 +58,7 @@ app.get('/assign', (req, res)=>{ // GET endpoint to get the specified assignment
 app.post('/assign', (req, res)=>{ // POST endpoint to insert new assignment into AssignmentTable
   const {UserID, AssetTag, AssignDate, IsActive} = req.body;
 
-  let dbQuery = 'SELECT * FROM AssignmentTable WHERE AssetTag = ?'
+  let dbQuery = 'SELECT * FROM AssignmentTable WHERE AssetTag = ? AND IsActive = true'
   connecting.query(dbQuery, [AssetTag], (err, result)=>{
     if (err) {return res.status(500).json({error: err.message})}
 

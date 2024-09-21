@@ -1,11 +1,8 @@
-
-<!-- -->
-<!--Here goes all the code for the navbar-->
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
     <a class="navbar-brand">Inventory management</a>
     <div class="collapse navbar-collapse" id="navbarNav">
-    <button (click)="showComponent('AssetMenu')" class="btn btn-light">Manage assets</button>
+      <button (click)="showComponent('AssetMenu')" class="btn btn-light">Manage assets</button>
       <button (click)="showComponent('UserMenu')" class="btn btn-light">Manage users</button>
       <button (click)="showComponent('AssignMenu')" class="btn btn-light">Manage assignments</button>
 
@@ -13,17 +10,15 @@
   </div>
 </nav>
 
-<div class="container">
+<div class="container text-center">
   <div *ngIf="selectedComponent === 'AssetMenu'">
-    Test 1
     <app-asset-menu></app-asset-menu>
   </div>
   <div *ngIf="selectedComponent === 'UserMenu'">
-    Test 2
+    <h1 class="text-danger">This is a test for the layout</h1>
     <app-user-menu></app-user-menu>
   </div>
   <div *ngIf="selectedComponent === 'AssignMenu'">
-    Test 3
     <app-assign-menu></app-assign-menu>
   </div>
 </div>

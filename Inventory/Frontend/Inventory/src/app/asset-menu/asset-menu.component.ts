@@ -8,5 +8,8 @@ import { Component } from '@angular/core';
   styleUrl: './asset-menu.component.css'
 })
 export class AssetMenuComponent {
-
+  selectedComponent: string = 'AssignMenu';
+  showComponent(component:string){
+    this.selectedComponent = component;
+  }
 }
