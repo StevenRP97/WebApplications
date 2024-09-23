@@ -1,18 +1,25 @@
 <h1 class="text-light">Manage hardware</h1>
 <h2 class="text-secondary">All assets</h2>
 
-<div class="container text-center">
-  <!-- Titles and that stuff -->
-  <div class="row">
-    <h5 class="col text-secondary">Asset tag</h5>
-    <h5 class="col text-secondary">Name</h5>
-    <h5 class="col text-secondary">Description</h5>
-    <h5 class="col text-secondary">Creation date</h5>
-    <h5 class="col text-secondary">Is active</h5>
-  </div>
+<table class="container">
+  <thead class="col">
+    <tr>
+      <td class="text-light">Asset Number</td>
+      <td class="text-light">Name</td>
+      <td class="text-light">Description</td>
+      <td class="text-light">Creation Date</td>
+      <td class="text-light">Is Active</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let i of data" class="col">
+      <td class="text-light">{{ i.AssetTag }}</td>
+      <td class="text-light">{{ i.Name }}</td>
+      <td class="text-light">{{ i.Description }}</td>
+      <td class="text-light">{{ i.CreationDate }}</td>
+      <td class="text-light">{{ i.IsActive }}</td>
+    </tr>
 
-  <!-- All the content gotten from AssetTable -->
-  <div class="row">
-    <div class="assets"></div>
-  </div>
-</div>
+  </tbody>
+</table>
+
