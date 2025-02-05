@@ -1,0 +1,26 @@
+DATABASE
+
+- InventoryDB
+
+TABLES
+
+AssetTable:
+- Name: varchar
+- Description: varchar
+- AssetTag: varchar
+- CreationDate: datetime
+- IsActive: bool
+
+AssignmentTable:
+- UserID
+- AssetTag: varchar
+- AssignDate: datetime
+- IsActive: bool
+
+UserTable:
+- Name: varchar
+- LastName: varchar
+- Email: varchar
+- ID: varchar
+- StartDate: datetime
+- IsActive: bool
