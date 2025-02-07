@@ -9,7 +9,7 @@ app.use(express.json());
 const connecting = mysql.createConnection({
   host:'127.0.0.1',
   user:'root',
-  password:'0123456789',
+  password:'1234',
   database:'InventoryDB'
 })
 
@@ -39,9 +39,9 @@ app.get('/user', (req, res)=>{ // GET endpoint to get specific users from UserTa
 })
 
 app.post('/user', (req, res)=>{ // POST endpoint to insert new users into UserTable
-  const {Name, LastName, Email, ID, IsActive} = req.body;
-  const dbQuery = `INSERT INTO UserTable (Name, LastName, Email, ID, IsActive) VALUES(?, ?, ?, ?, ?);`
-  connecting.query(dbQuery, [Name, LastName, Email, ID, IsActive], (err, result)=>{
+  const {Name, LastName, Email, ID, StartDate, IsActive} = req.body;
+  const dbQuery = `INSERT INTO UserTable (Name, LastName, Email, ID, StartDate, IsActive) VALUES(?, ?, ?, ?, ?, ?);`
+  connecting.query(dbQuery, [Name, LastName, Email, ID, StartDate, IsActive], (err, result)=>{
     if (err) {
       return res.status(500).json({error: err.message})
     }res.json(result);

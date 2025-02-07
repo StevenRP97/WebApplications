@@ -9,7 +9,7 @@ app.use(express.json());
 const connecting = mysql.createConnection({
   host:'127.0.0.1',
   user:'root',
-  password:'0123456789',
+  password:'1234',
   database:'InventoryDB'
 
 })
