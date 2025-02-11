@@ -1,4 +1,8 @@
-DATABASE
+CURRENT STATUS
+
+All of the APIs are able to be ran and used to modify the database. The Angular is also able to run but is not complete. 
+
+DATABASE STRUCTURE
 
 InventoryDB:
 - User: root
